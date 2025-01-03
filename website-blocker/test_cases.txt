@@ -1,0 +1,5 @@
+Test Case 1: Verify Initial Migration and Storage
+1. Load extension in Developer Mode
+2. Check storage contents via debug.html
+3. Verify twitter.com, facebook.com are present
+4. Confirm dynamic rules exist

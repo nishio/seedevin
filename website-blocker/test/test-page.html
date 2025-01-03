@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Blocker Test Page</title>
+    <script src="../background.js"></script>
+    <script src="../popup.js"></script>
+</head>
+<body>
+    <h1>Website Blocker Test Page</h1>
+    <div id="storage-test">
+        <h2>Storage Test</h2>
+        <button onclick="testStorage()">Test Storage</button>
+        <pre id="storage-output"></pre>
+    </div>
+    <div id="rules-test">
+        <h2>Dynamic Rules Test</h2>
+        <button onclick="testRules()">Test Rules</button>
+        <pre id="rules-output"></pre>
+    </div>
+    <script>
+        async function testStorage() {
+            const output = document.getElementById('storage-output');
+            try {
+                const { blockedSites } = await chrome.storage.local.get('blockedSites');
+                output.textContent = JSON.stringify(blockedSites, null, 2);
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        async function testRules() {
+            const output = document.getElementById('rules-output');
+            try {
+                const rules = await chrome.declarativeNetRequest.getDynamicRules();
+                output.textContent = JSON.stringify(rules, null, 2);
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

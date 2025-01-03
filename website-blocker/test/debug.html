@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rule Debug</title>
+    <style>
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 5px; padding: 5px; }
+        .section { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        #output { white-space: pre-wrap; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h2>Website Blocker Debug Panel</h2>
+    
+    <div class="section">
+        <h3>Test Links</h3>
+        <p>Click these links to test blocking (they should be blocked):</p>
+        <ul>
+            <li><a href="http://test-twitter.com:8000" target="_blank">test-twitter.com</a></li>
+            <li><a href="http://test-facebook.com:8000" target="_blank">test-facebook.com</a></li>
+            <li><a href="http://test-instagram.com:8000" target="_blank">test-instagram.com</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Storage Operations</h3>
+        <button onclick="viewStorage()">View Storage Contents</button>
+        <button onclick="testAddToStorage('test-example.com')">Add test-example.com to Storage</button>
+        <button onclick="clearStorage()">Clear Storage</button>
+    </div>
+
+    <div class="section">
+        <h3>Rule Operations</h3>
+        <button onclick="testGetAllRules()">Get All Rules</button>
+        <button onclick="testAddRule('test-example.com')">Add test-example.com Rule</button>
+        <button onclick="testRemoveAllRules()">Remove All Rules</button>
+    </div>
+
+    <div class="section">
+        <h3>Verification</h3>
+        <button onclick="verifyStorageAndRules()">Verify Storage/Rules Sync</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        const output = document.getElementById('output');
+        
+        function log(message, isError = false) {
+            const div = document.createElement('div');
+            div.className = isError ? 'error' : 'success';
+            div.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            output.insertBefore(div, output.firstChild);
+            console.log(message);
+        }
+
+        async function testGetAllRules() {
+            try {
+                const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+                const staticRules = await chrome.declarativeNetRequest.getSessionRules();
+                log('Dynamic Rules: ' + JSON.stringify(dynamicRules, null, 2));
+                log('Static Rules: ' + JSON.stringify(staticRules, null, 2));
+            } catch (error) {
+                log('Error getting rules: ' + error.message, true);
+                console.error('Error:', error);
+            }
+        }
+
+        async function testAddRule(domain) {
+            try {
+                // Get current rules to check IDs
+                const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
+                const staticRules = await chrome.declarativeNetRequest.getSessionRules();
+                const allRuleIds = [...currentRules, ...staticRules].map(r => r.id);
+                const newId = allRuleIds.length ? Math.max(...allRuleIds) + 1 : 100;
+
+                const newRule = {
+                    id: newId,
+                    priority: 1,
+                    action: { type: 'block' },
+                    condition: {
+                        urlFilter: `||${domain}^`,
+                        resourceTypes: ['main_frame']
+                    }
+                };
+
+                await chrome.declarativeNetRequest.updateDynamicRules({
+                    addRules: [newRule],
+                    removeRuleIds: []
+                });
+
+                log(`Successfully added rule for ${domain} with ID ${newId}`);
+                testGetAllRules();
+            } catch (error) {
+                log(`Error adding rule for ${domain}: ${error.message}`, true);
+                console.error('Error:', error);
+            }
+        }
+
+        async function testRemoveAllRules() {
+            try {
+                const rules = await chrome.declarativeNetRequest.getDynamicRules();
+                await chrome.declarativeNetRequest.updateDynamicRules({
+                    removeRuleIds: rules.map(r => r.id)
+                });
+                log('Successfully removed all dynamic rules');
+                testGetAllRules();
+            } catch (error) {
+                log('Error removing rules: ' + error.message, true);
+                console.error('Error:', error);
+            }
+        }
+
+        async function viewStorage() {
+            try {
+                const data = await chrome.storage.local.get(['blockedSites', 'lastRuleId']);
+                log('Storage contents:', false);
+                log(JSON.stringify(data, null, 2), false);
+            } catch (error) {
+                log('Error viewing storage: ' + error.message, true);
+            }
+        }
+
+        async function testAddToStorage(domain) {
+            try {
+                const { blockedSites = [], lastRuleId = 100 } = await chrome.storage.local.get(['blockedSites', 'lastRuleId']);
+                const newSite = {
+                    domain,
+                    enabled: true,
+                    addedAt: Date.now()
+                };
+                
+                await chrome.storage.local.set({
+                    blockedSites: [...blockedSites, newSite],
+                    lastRuleId: lastRuleId + 1
+                });
+                
+                log(`Added ${domain} to storage`);
+                viewStorage();
+            } catch (error) {
+                log('Error adding to storage: ' + error.message, true);
+            }
+        }
+
+        async function clearStorage() {
+            try {
+                await chrome.storage.local.clear();
+                log('Storage cleared');
+                viewStorage();
+            } catch (error) {
+                log('Error clearing storage: ' + error.message, true);
+            }
+        }
+
+        async function verifyStorageAndRules() {
+            try {
+                const [storage, rules] = await Promise.all([
+                    chrome.storage.local.get(['blockedSites', 'lastRuleId']),
+                    chrome.declarativeNetRequest.getDynamicRules()
+                ]);
+                
+                log('=== Storage and Rules Verification ===');
+                log('Storage State: ' + JSON.stringify(storage, null, 2));
+                log('Dynamic Rules: ' + JSON.stringify(rules, null, 2));
+                
+                const { blockedSites = [] } = storage;
+                
+                // Check if all stored sites have rules
+                const missingRules = blockedSites.filter(site => 
+                    !rules.some(rule => rule.condition.urlFilter === `||${site.domain}^`)
+                );
+                
+                if (missingRules.length) {
+                    log('Warning: Sites missing rules: ' + JSON.stringify(missingRules), true);
+                } else {
+                    log('✓ All stored sites have corresponding rules');
+                }
+                
+                // Check if all rules have stored sites
+                const orphanRules = rules.filter(rule =>
+                    !blockedSites.some(site => `||${site.domain}^` === rule.condition.urlFilter)
+                );
+                
+                if (orphanRules.length) {
+                    log('Warning: Rules without storage entries: ' + JSON.stringify(orphanRules), true);
+                } else {
+                    log('✓ All rules have corresponding storage entries');
+                }
+            } catch (error) {
+                log('Error during verification: ' + error.message, true);
+            }
+        }
+
+        // Initial checks
+        testGetAllRules();
+        viewStorage();
+    </script>
+</body>
+</html>
