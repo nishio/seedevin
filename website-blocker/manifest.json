@@ -29,5 +29,9 @@
       "enabled": true,
       "path": "rules.json"
     }]
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["test/*"],
+    "matches": ["<all_urls>"]
+  }]
 }

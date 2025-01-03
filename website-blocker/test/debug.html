@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rule Debug</title>
+</head>
+<body>
+    <div id="output"></div>
+    <script>
+        async function testRuleAddition() {
+            const output = document.getElementById('output');
+            try {
+                const newRule = {
+                    id: 100,  // Use high ID to avoid conflicts
+                    priority: 1,
+                    action: { type: 'block' },
+                    condition: {
+                        urlFilter: '||example.com^',
+                        resourceTypes: ['main_frame']
+                    }
+                };
+                
+                // Log current rules
+                const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
+                output.innerHTML += `Current rules: ${JSON.stringify(currentRules, null, 2)}<br><br>`;
+                
+                // Try to add new rule
+                await chrome.declarativeNetRequest.updateDynamicRules({
+                    addRules: [newRule],
+                    removeRuleIds: []
+                });
+                
+                // Verify rule was added
+                const updatedRules = await chrome.declarativeNetRequest.getDynamicRules();
+                output.innerHTML += `Updated rules: ${JSON.stringify(updatedRules, null, 2)}<br>`;
+            } catch (error) {
+                output.innerHTML += `Error: ${error.message}<br>`;
+                console.error('Rule addition error:', error);
+            }
+        }
+        testRuleAddition();
+    </script>
+</body>
+</html>
