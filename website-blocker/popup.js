@@ -1,23 +1,27 @@
-// Initialize rules counter (will be set when popup opens)
-let ruleIdCounter;
+// Load blocked sites from storage and manage rules
+async function loadStorageSites() {
+  const { blockedSites } = await chrome.storage.local.get('blockedSites');
+  return blockedSites || [];
+}
 
-// Load blocked sites when popup opens and initialize counter
+// Get and increment rule ID from storage
+async function getNextRuleId() {
+  const { lastRuleId } = await chrome.storage.local.get('lastRuleId');
+  const nextId = (lastRuleId || 100) + 1;
+  await chrome.storage.local.set({ lastRuleId: nextId });
+  return nextId;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Get both dynamic and static rules to find highest ID
-    const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
-    const staticRules = await chrome.declarativeNetRequest.getSessionRules();
-    const allRuleIds = [...dynamicRules, ...staticRules].map(r => r.id);
-    ruleIdCounter = allRuleIds.length ? Math.max(...allRuleIds) + 1 : 100;
-    
-    // Display existing blocked sites
-    dynamicRules.forEach(rule => {
-      addSiteToList(rule.condition.urlFilter.replace('||', '').replace('^', ''));
+    const sites = await loadStorageSites();
+    sites.forEach(site => {
+      if (site.enabled) {
+        addSiteToList(site.domain);
+      }
     });
   } catch (error) {
-    console.error('Failed to initialize rule counter:', error);
-    // Default to 100 if we can't get existing rules
-    ruleIdCounter = 100;
+    console.error('Failed to load blocked sites:', error);
   }
 });
 
@@ -30,7 +34,7 @@ document.getElementById('addSite').addEventListener('click', async () => {
 
   // Create new blocking rule
   const newRule = {
-    id: ruleIdCounter++,
+    id: await getNextRuleId(),
     priority: 1,
     action: { type: 'block' },
     condition: {
@@ -68,21 +72,33 @@ function addSiteToList(domain) {
   removeButton.className = 'remove-btn';
   removeButton.textContent = 'Remove';
   removeButton.onclick = async () => {
-    const rules = await chrome.declarativeNetRequest.getDynamicRules();
-    const ruleToRemove = rules.find(rule => 
-      rule.condition.urlFilter === `||${domain}^`
-    );
-    
-    if (ruleToRemove) {
-      try {
-        await chrome.declarativeNetRequest.updateDynamicRules({
-          removeRuleIds: [ruleToRemove.id]
-        });
+    try {
+      // Get current sites and rules
+      const [sites, rules] = await Promise.all([
+        loadStorageSites(),
+        chrome.declarativeNetRequest.getDynamicRules()
+      ]);
+
+      // Find rule to remove
+      const ruleToRemove = rules.find(rule => 
+        rule.condition.urlFilter === `||${domain}^`
+      );
+
+      if (ruleToRemove) {
+        // Update storage and rules
+        await Promise.all([
+          chrome.storage.local.set({
+            blockedSites: sites.filter(site => site.domain !== domain)
+          }),
+          chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds: [ruleToRemove.id]
+          })
+        ]);
         siteItem.remove();
-      } catch (error) {
-        console.error('Failed to remove blocking rule:', error);
-        alert('Failed to remove blocking rule. Please try again.');
       }
+    } catch (error) {
+      console.error('Failed to remove blocking rule:', error);
+      alert('Failed to remove blocking rule. Please try again.');
     }
   };
   
