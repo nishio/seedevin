@@ -2,42 +2,90 @@
 <html>
 <head>
     <title>Rule Debug</title>
+    <style>
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 5px; padding: 5px; }
+    </style>
 </head>
 <body>
+    <h2>Website Blocker Debug Panel</h2>
+    <button onclick="testGetAllRules()">Get All Rules</button>
+    <button onclick="testAddRule('example.com')">Add example.com</button>
+    <button onclick="testAddRule('test.com')">Add test.com</button>
+    <button onclick="testRemoveAllRules()">Remove All Dynamic Rules</button>
     <div id="output"></div>
+
     <script>
-        async function testRuleAddition() {
-            const output = document.getElementById('output');
+        const output = document.getElementById('output');
+        
+        function log(message, isError = false) {
+            const div = document.createElement('div');
+            div.className = isError ? 'error' : 'success';
+            div.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            output.insertBefore(div, output.firstChild);
+            console.log(message);
+        }
+
+        async function testGetAllRules() {
             try {
+                const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+                const staticRules = await chrome.declarativeNetRequest.getSessionRules();
+                log('Dynamic Rules: ' + JSON.stringify(dynamicRules, null, 2));
+                log('Static Rules: ' + JSON.stringify(staticRules, null, 2));
+            } catch (error) {
+                log('Error getting rules: ' + error.message, true);
+                console.error('Error:', error);
+            }
+        }
+
+        async function testAddRule(domain) {
+            try {
+                // Get current rules to check IDs
+                const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
+                const staticRules = await chrome.declarativeNetRequest.getSessionRules();
+                const allRuleIds = [...currentRules, ...staticRules].map(r => r.id);
+                const newId = allRuleIds.length ? Math.max(...allRuleIds) + 1 : 100;
+
                 const newRule = {
-                    id: 100,  // Use high ID to avoid conflicts
+                    id: newId,
                     priority: 1,
                     action: { type: 'block' },
                     condition: {
-                        urlFilter: '||example.com^',
+                        urlFilter: `||${domain}^`,
                         resourceTypes: ['main_frame']
                     }
                 };
-                
-                // Log current rules
-                const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
-                output.innerHTML += `Current rules: ${JSON.stringify(currentRules, null, 2)}<br><br>`;
-                
-                // Try to add new rule
+
                 await chrome.declarativeNetRequest.updateDynamicRules({
                     addRules: [newRule],
                     removeRuleIds: []
                 });
-                
-                // Verify rule was added
-                const updatedRules = await chrome.declarativeNetRequest.getDynamicRules();
-                output.innerHTML += `Updated rules: ${JSON.stringify(updatedRules, null, 2)}<br>`;
+
+                log(`Successfully added rule for ${domain} with ID ${newId}`);
+                testGetAllRules();
             } catch (error) {
-                output.innerHTML += `Error: ${error.message}<br>`;
-                console.error('Rule addition error:', error);
+                log(`Error adding rule for ${domain}: ${error.message}`, true);
+                console.error('Error:', error);
             }
         }
-        testRuleAddition();
+
+        async function testRemoveAllRules() {
+            try {
+                const rules = await chrome.declarativeNetRequest.getDynamicRules();
+                await chrome.declarativeNetRequest.updateDynamicRules({
+                    removeRuleIds: rules.map(r => r.id)
+                });
+                log('Successfully removed all dynamic rules');
+                testGetAllRules();
+            } catch (error) {
+                log('Error removing rules: ' + error.message, true);
+                console.error('Error:', error);
+            }
+        }
+
+        // Initial rules check
+        testGetAllRules();
     </script>
 </body>
 </html>
