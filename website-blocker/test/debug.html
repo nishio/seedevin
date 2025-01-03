@@ -14,16 +14,26 @@
     <h2>Website Blocker Debug Panel</h2>
     
     <div class="section">
+        <h3>Test Links</h3>
+        <p>Click these links to test blocking (they should be blocked):</p>
+        <ul>
+            <li><a href="http://test-twitter.com:8000" target="_blank">test-twitter.com</a></li>
+            <li><a href="http://test-facebook.com:8000" target="_blank">test-facebook.com</a></li>
+            <li><a href="http://test-instagram.com:8000" target="_blank">test-instagram.com</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
         <h3>Storage Operations</h3>
         <button onclick="viewStorage()">View Storage Contents</button>
-        <button onclick="testAddToStorage('example.com')">Add example.com to Storage</button>
+        <button onclick="testAddToStorage('test-example.com')">Add test-example.com to Storage</button>
         <button onclick="clearStorage()">Clear Storage</button>
     </div>
 
     <div class="section">
         <h3>Rule Operations</h3>
         <button onclick="testGetAllRules()">Get All Rules</button>
-        <button onclick="testAddRule('example.com')">Add example.com Rule</button>
+        <button onclick="testAddRule('test-example.com')">Add test-example.com Rule</button>
         <button onclick="testRemoveAllRules()">Remove All Rules</button>
     </div>
 

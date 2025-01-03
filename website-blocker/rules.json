@@ -4,7 +4,7 @@
     "priority": 1,
     "action": { "type": "block" },
     "condition": {
-      "urlFilter": "||twitter.com^",
+      "urlFilter": "||test-twitter.com^",
       "resourceTypes": ["main_frame"]
     }
   },
@@ -13,7 +13,7 @@
     "priority": 1,
     "action": { "type": "block" },
     "condition": {
-      "urlFilter": "||facebook.com^",
+      "urlFilter": "||test-facebook.com^",
       "resourceTypes": ["main_frame"]
     }
   },
@@ -22,7 +22,7 @@
     "priority": 1,
     "action": { "type": "block" },
     "condition": {
-      "urlFilter": "||instagram.com^",
+      "urlFilter": "||test-instagram.com^",
       "resourceTypes": ["main_frame"]
     }
   }
