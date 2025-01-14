@@ -1,0 +1,36 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage{hyperref}
+\urlstyle{same}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+
+\geometry{margin=1in}
+\setstretch{1.5}
+
+% Japanese font configuration
+\setCJKmainfont[BoldFont=IPAGothic]{IPAMincho}
+\setCJKsansfont{IPAGothic}
+\setCJKmonofont{IPAGothic}
+
+\title{Plurality: A Survey of Digital Democracy Implementation and Mass Adaptation}
+\author{Devin AI}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\input{body}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,47 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+
+\geometry{margin=1in}
+\setstretch{1.5}
+
+% Japanese font configuration
+\setCJKmainfont[BoldFont=IPAGothic]{IPAMincho}
+\setCJKsansfont{IPAGothic}
+\setCJKmonofont{IPAGothic}
+
+\title{Test Document}
+\author{Devin AI}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Test Section}
+
+This is a test of the \LaTeX{} compilation system with citations \citep{buterin2019flexible}.
+
+\section{日本語テスト}
+
+これは日本語表示のテストです。引用も確認します \citep{weyl2022decentralized}。
+
+\subsection{数式テスト}
+
+インライン数式: $x^2 + y^2 = z^2$
+
+ディスプレイ数式:
+\[
+f(x) = \int_{-\infty}^{\infty} e^{-x^2} dx
+\]
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
