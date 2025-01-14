@@ -1,5 +1,27 @@
 # Community Notes (Birdwatch): Implementation Analysis
-Source: communitynotes.twitter.com/guide/en/about/introduction
+Source: [@communitynotes2024]
+
+## Technical Implementation Details
+
+### Consensus Algorithm
+- Matrix factorization on note-rater sparse matrix
+- Identifies latent representations of users and notes
+- Higher regularization on intercept terms for viewpoint diversity
+- Minimum threshold: 5 ratings per note
+- Helpfulness scoring: >= 0.40 for "Helpful" status
+- Not Helpful threshold: < -0.05 - 0.8 * abs(noteFactorScore)
+
+### Rating System Evolution
+- January 2021: Binary yes/no ratings
+- June 2021: Added "somewhat" option (mapped to continuous 0.0-1.0 scale)
+- Periodic computation intervals to prevent rating bias
+- Continuous improvement of ranking mechanisms
+
+### Technical Safeguards
+- Upper confidence bound estimates for note quality
+- Regularization to handle rating sparsity
+- Independent rating collection periods
+- Automated gaming prevention through factor analysis
 
 ## Key Concepts
 

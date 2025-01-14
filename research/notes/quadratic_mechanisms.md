@@ -1,5 +1,5 @@
 # Quadratic Voting and Funding: Implementation Analysis
-Source: "A Flexible Design for Funding Public Goods" - Buterin, Hitzig, Weyl (2018)
+Sources: [@buterin2019flexible], [@coloradoqv2019], [@gitcoingrants2024]
 
 ## Quadratic Voting (QV)
 

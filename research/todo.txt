@@ -1,29 +1,29 @@
 Research Sources Todo List
 
 Plurality Core Concept:
-- [ ] "A Flexible Design for Funding Public Goods" - Buterin, Hitzig, Weyl (2018)
-- [ ] "Decentralized Society: Finding Web3's Soul" - Weyl, Ohlhaver, Buterin (2022)
-- [ ] vTaiwan documentation and case studies (info.vtaiwan.tw)
+- [x] "A Flexible Design for Funding Public Goods" - Buterin, Hitzig, Weyl (2018)
+- [x] "Decentralized Society: Finding Web3's Soul" - Weyl, Ohlhaver, Buterin (2022)
+- [x] vTaiwan documentation and case studies (info.vtaiwan.tw)
 
 Polis Implementation:
-- [ ] vTaiwan's Polis implementation documentation
-- [ ] pol.is technical documentation
-- [ ] Case study: OpenAI Democratic Inputs project using Polis
+- [x] vTaiwan's Polis implementation documentation
+- [x] pol.is technical documentation
+- [x] Case study: OpenAI Democratic Inputs project using Polis
 
 Community Notes (Birdwatch):
-- [ ] Official Community Notes documentation and algorithm
-- [ ] Community Notes open source code (github.com/twitter/communitynotes)
-- [ ] Implementation case studies and impact metrics
+- [x] Official Community Notes documentation and algorithm
+- [x] Community Notes open source code (github.com/twitter/communitynotes)
+- [x] Implementation case studies and impact metrics
 
 Quadratic Voting:
-- [ ] "Quadratic Voting: How Mechanism Design Can Radicalize Democracy" - Weyl
-- [ ] RadicalxChange implementation examples
-- [ ] Colorado Democratic Assembly case study
+- [x] "Quadratic Voting: How Mechanism Design Can Radicalize Democracy" - Weyl
+- [x] RadicalxChange implementation examples
+- [x] Colorado Democratic Assembly case study
 
 Quadratic Funding:
-- [ ] "A Flexible Design for Funding Public Goods" - Buterin, Hitzig, Weyl
-- [ ] Gitcoin Grants implementation case studies
-- [ ] CLR.fund implementation examples
+- [x] "A Flexible Design for Funding Public Goods" - Buterin, Hitzig, Weyl
+- [x] Gitcoin Grants implementation case studies
+- [x] CLR.fund implementation examples
 
 Additional Examples:
 - [ ] Taiwan's Digital Democracy initiatives

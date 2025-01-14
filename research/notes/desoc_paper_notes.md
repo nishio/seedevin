@@ -1,6 +1,6 @@
 # Decentralized Society: Finding Web3's Soul
 Authors: E. Glen Weyl, Puja Ohlhaver, Vitalik Buterin
-Source: Microsoft Research Blog, May 2022
+Source: [@weyl2022decentralized]
 
 ## Key Concepts
 

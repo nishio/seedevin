@@ -1,5 +1,5 @@
 # vTaiwan: Digital Democracy Implementation
-Source: info.vtaiwan.tw (Last updated Dec 2023)
+Source: [@vtaiwan2023]
 
 ## Key Concepts
 
