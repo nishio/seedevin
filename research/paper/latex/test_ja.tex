@@ -1,0 +1,59 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+
+\geometry{margin=1in}
+\setstretch{1.5}
+
+% Japanese font configuration
+\setCJKmainfont[BoldFont=IPAGothic]{IPAMincho}
+\setCJKsansfont{IPAGothic}
+\setCJKmonofont{IPAGothic}
+
+\title{複数性の実装に関するテスト}
+\author{Devin AI}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{はじめに}
+
+このドキュメントは、\LaTeX{}での日本語表示と引用機能のテストです。
+
+\section{引用テスト}
+
+Tangらの研究 \citep{vtaiwan2023} によると、vTaiwanプラットフォームは80\%の実装成功率を達成しています。
+
+また、Weylらの研究 \citep{weyl2022decentralized} では、分散型社会（DeSoc）の概念が提案されています。
+
+\section{数式テスト}
+
+二次投票（Quadratic Voting）の計算式:
+\[
+\text{投票力} = \sqrt{\text{トークン数}}
+\]
+
+\section{表テスト}
+
+\begin{tabular}{|l|c|r|}
+\hline
+実装メカニズム & 成功率 & 採用数 \\
+\hline
+Polis & 80\% & 28+ \\
+Community Notes & 75\% & 1000+ \\
+二次投票 & 65\% & 10+ \\
+\hline
+\end{tabular}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
