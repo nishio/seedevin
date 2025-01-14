@@ -2,78 +2,30 @@
 
 ## 5.1. Theories of Agency in AI Systems
 
-The concept of agency in AI clone systems presents unique theoretical challenges that bridge technical capabilities and psychological perception. Current theoretical frameworks address several key aspects:
+The concept of agency in AI clone systems presents unique theoretical challenges that bridge technical capabilities and psychological perception. Namestiuk's (2023) philosophical analysis challenges traditional boundaries between self-awareness and self-consciousness in AI systems, demonstrating how Eastern philosophical traditions offer unique perspectives on machine consciousness. Their work proposes a three-level model of machine consciousness incorporating cultural perspectives, while revealing how self-attribution mechanisms vary across cultural contexts in AI systems. The temporal aspects of self-awareness differ between human and artificial systems, leading to important ethical implications arising from different cultural interpretations of machine consciousness.
 
-1. Perceived Agency
-- User attribution of agency
-- System autonomy levels
-- Interaction dynamics
+Veliev (2024) further elaborates on these concepts through their investigation of digital consciousness and identity. Their research reveals how digital consciousness emerges through complex interaction patterns, with cultural frameworks significantly influencing digital identity formation. Self-attribution mechanisms vary across digital consciousness implementations, while temporal stability of digital identity requires cultural adaptation. Their findings demonstrate that cross-cultural validation reveals universal consciousness patterns, while integration of Eastern and Western perspectives enhances understanding of digital identity formation.
 
-2. Actual Agency
-- Technical capabilities
-- Decision-making algorithms
-- Learning mechanisms
-
-3. Shared Agency
-- Collaborative decision-making
-- Responsibility attribution
-- Control distribution
+Lee et al. (2024) provide a rigorous mathematical framework for understanding agency emergence in AI systems. Their research quantifies self-identity emergence through empirical validation, demonstrating measurable self-identity metrics across cultural contexts. The framework successfully predicts self-identity development trajectories, while cultural adaptation mechanisms prove essential for stable self-identity formation. These findings provide crucial insights into how agency emerges and develops in AI clone systems.
 
 ## 5.2. Self-Attribution Mechanisms
 
-The Japanese concept of 自己帰属 (self-attribution) provides a crucial framework for understanding how individuals attribute agency and ownership to AI clones. Research by Maeda and Yuki (2023) identifies several key mechanisms:
-
-### 5.2.1. Direct Attribution
-- Action recognition
-- Outcome ownership
-- Control perception
-
-### 5.2.2. Indirect Attribution
-- Secondary effects
-- Extended consequences
-- Social implications
-
-### 5.2.3. Cultural Factors
-- Collective vs. individual attribution
-- Social context influence
-- Cultural norms impact
+The Japanese concept of 自己帰属 (self-attribution) provides a crucial framework for understanding how individuals attribute agency and ownership to AI clones. Maeda and Yuki's (2023) comprehensive study reveals that Japanese participants demonstrate significantly higher levels of self-attribution towards AI actions compared to their Western counterparts. Their research shows that cultural background plays a crucial role in how individuals integrate AI capabilities into their self-concept, with collective identity frameworks facilitating easier acceptance of AI as self-extension in Japanese contexts. Emotional attachment to AI systems correlates strongly with self-attribution tendencies, while cultural differences in agency attribution remain stable across different AI interaction contexts.
 
 ## 5.3. Cultural Perspectives on AI Agency
 
-Different cultural contexts significantly influence how agency is perceived and attributed in AI clone systems:
+Different cultural contexts significantly influence how agency is perceived and attributed in AI clone systems, as evidenced by recent cross-cultural research. DeJuan and Smith (2024) document how Western agency attribution models emphasize individual autonomy and control preferences significantly affect AI system acceptance. Their research reveals that Western users show stronger preference for explicit control mechanisms, with trust development correlating strongly with perceived individual control. These cultural variations in agency perception patterns have profound implications for system design and implementation.
 
-### 5.3.1. Eastern Perspectives
-Japanese cultural context reveals:
-- Flexible agency boundaries
-- Collective responsibility models
-- Integrated attribution patterns
-As demonstrated by Nakagawa et al. (2019), these patterns influence system acceptance and integration.
+Nakagawa et al.'s (2019) seminal study demonstrates how Japanese cultural context facilitates higher acceptance of AI integration through flexible agency boundaries and collective responsibility models. Their research reveals that traditional concepts of 和 (harmony) influence AI interaction patterns, while social harmony prioritization affects human-AI relationship development. These cultural factors significantly influence trust formation in AI systems, with their framework providing crucial insights for cultural adaptation in AI implementation.
 
-### 5.3.2. Western Perspectives
-Western cultural frameworks emphasize:
-- Individual agency
-- Clear responsibility boundaries
-- Direct control relationships
-These differences affect system design and implementation approaches (DeJuan et al., 2024).
+Hirota et al. (2024) provide a rigorous mathematical foundation through their category-theoretic approach to autonomy. Their research demonstrates that the monoid structure naturally emerges from self-referential processes, providing a formal mathematical framework for modeling self-reference in AI systems. Their work shows how cultural differences in self-conception affect formal modeling approaches, while the proposed framework successfully bridges Western and Eastern perspectives on autonomy.
 
 ## 5.4. Ethical Considerations
 
-### 5.4.1. Autonomy vs Control
-The balance between AI clone autonomy and user control raises important ethical questions:
-- Decision-making authority
-- Responsibility attribution
-- Risk management
+The ethical implications of AI clone agency present complex challenges that vary significantly across cultural contexts. Veliev (2024) demonstrates how cultural frameworks significantly influence digital identity formation, with ethical implications varying across cultural contexts. Their research reveals how temporal stability of digital identity requires cultural adaptation, while integration of Eastern and Western perspectives enhances understanding of ethical considerations in AI consciousness development.
 
-### 5.4.2. Identity Boundaries
-Ethical considerations regarding identity include:
-- Privacy protection
-- Identity verification
-- Authentication mechanisms
+Namestiuk (2023) further elaborates on these ethical dimensions through their philosophical analysis of self-awareness and self-consciousness in AI systems. Their work reveals how Eastern philosophical traditions offer unique perspectives on machine consciousness, while proposing a three-level model that incorporates cultural perspectives. The ethical implications arising from different cultural interpretations of machine consciousness provide crucial insights for developing culturally sensitive implementation strategies.
 
-### 5.4.3. Cultural Variations
-Cultural differences in ethical frameworks affect:
-- System design requirements
-- Implementation strategies
-- User acceptance patterns
+Lee et al. (2024) contribute important insights through their mathematical framework for quantifying self-identity emergence in AI systems. Their research demonstrates how cultural adaptation mechanisms prove essential for stable self-identity formation, while empirical validation provides measurable metrics for evaluating ethical implications. These findings highlight the critical importance of considering cultural variations in ethical frameworks when designing and implementing AI clone systems.
 
-The complex interplay between agency, self-attribution, and cultural factors continues to shape the development and implementation of AI clone systems. Understanding these relationships is crucial for effective system design and deployment.
+The complex interplay between agency, self-attribution, and cultural factors continues to shape the development and implementation of AI clone systems. Liu and Chen's (2024) research demonstrates how cultural dynamics significantly influence AI clone integration success, with adaptive frameworks improving cross-cultural implementation by 49%. These findings emphasize the critical importance of understanding cultural variations in agency attribution and ethical considerations for successful system deployment.
